@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wolf Wears | Streetwear</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff;color:#111}
+header{background:#080808;color:white;padding:16px 6%;display:flex;
+align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:900;letter-spacing:1px}
+nav a{color:white;text-decoration:none;margin:0 10px}
+button{cursor:pointer;border:0;border-radius:7px;padding:12px 16px;font-weight:bold}
+.hero{background:#111;color:white;padding:65px 7%;min-height:320px;
+display:flex;align-items:center;justify-content:space-between;gap:25px;
+background-image:linear-gradient(90deg,#080808 20%,#111b 65%,#1117),
+url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1400&q=85');
+background-size:cover;background-position:center}
+.hero h1{font-size:clamp(40px,7vw,70px);margin:10px 0}
+.hero p{line-height:1.6;max-width:440px}
+.light{background:#fff;color:#111}
+.features{display:flex;justify-content:space-around;gap:12px;
+padding:22px 5%;background:#f4f4f4;flex-wrap:wrap}
+.features div{text-align:center;font-size:14px}
+section{padding:38px 5%}
+.section-title{text-align:center;margin:0 0 25px;font-size:30px}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.card{border:1px solid #e5e5e5;border-radius:10px;overflow:hidden;background:white}
+.card img{width:100%;height:220px;object-fit:cover;background:#eee}
+.card-content{padding:13px}
+.card h3{margin:0 0 8px;font-size:17px}
+.price{font-weight:bold;font-size:18px;margin:10px 0}
+select,input{width:100%;padding:11px;margin:6px 0 10px;
+border:1px solid #ccc;border-radius:6px;background:white}
+.add{width:100%;background:#111;color:white}
+.add:hover,.dark:hover{background:#333}
+.cart{background:#f4f4f4}
+.cart-row{display:flex;justify-content:space-between;align-items:center;
+gap:10px;border-bottom:1px solid #ddd;padding:12px 0}
+.cart-row button{padding:6px 10px}
+.total{font-size:22px;font-weight:bold;text-align:right;margin:20px 0}
+.dark{background:#111;color:#fff}
+.whatsapp{background:#168b50;color:white;width:100%;margin-top:8px}
+.about{background:#101010;color:white;text-align:center}
+footer{background:#050505;color:#ddd;text-align:center;padding:25px}
+.small{font-size:12px;color:#666;line-height:1.5}
+@media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hero{padding:45px 6%}}
+@media(max-width:420px){.products{gap:10px}
+.card img{height:160px}.card-content{padding:9px}
+.card h3{font-size:15px}.logo{font-size:21px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🐺 WOLF WEARS</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#cart">Cart 🛒 <span id="count">0</span></a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <p>WEAR YOUR ATTITUDE</p>
+    <h1>WOLF WEARS</h1>
+    <h3>Streetwear made for your own rules.</h3>
+    <p>Bold designs. Everyday comfort. Find your style and make it yours.</p>
+    <button class="light" onclick="document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">SHOP NOW →</button>
+  </div>
+</section>
+
+<div class="features">
+  <div>🚚<br><b>Shipping</b><br>Details confirmed at checkout</div>
+  <div>👕<br><b>Streetwear</b><br>Everyday styles</div>
+  <div>📦<br><b>Order Support</b><br>Contact us on WhatsApp</div>
+</div>
+
+<section id="shop">
+  <h2 class="section-title">SHOP COLLECTION</h2>
+  <p style="text-align:center">Choose your design and size. Every listed item is ₹499.</p>
+  <div class="products" id="products"></div>
+</section>
+
+<section class="cart" id="cart">
+  <h2 class="section-title">YOUR CART</h2>
+  <div id="cart-items">Your cart is empty.</div>
+  <div class="total">Total: ₹<span id="total">0</span></div>
+
+  <h3>Customer details</h3>
+  <form id="checkout">
+    <label for="customer">Full name</label>
+    <input id="customer" required placeholder="Your name">
+    <label for="phone">Phone number</label>
+    <input id="phone" required type="tel" pattern="[0-9]{10}"
+      placeholder="10-digit mobile number">
+    <label for="address">Delivery address</label>
+    <input id="address" required placeholder="Full delivery address">
+    <button class="dark" type="submit" style="width:100%">ORDER ON WHATSAPP</button>
+    <p class="small">Your order will be sent to WhatsApp for confirmation.
+    This page does not collect online payments.</p>
+  </form>
+</section>
+
+<section class="about" id="about">
+  <h2>ABOUT WOLF WEARS</h2>
+  <p>Own your attitude. Choose your style. Wear it your way.</p>
+  <p>Wolf Wears — built for bold everyday fashion.</p>
+</section>
+</main>
+
+<footer>
+  <div class="logo">🐺 WOLF WEARS</div>
+  <p>Wear Your Attitude.</p>
+  <p>© <span id="year"></span> Wolf Wears</p>
+</footer>
+
+<script>
+const products = [
+  {id:1,name:"Wolf Graphic Tee",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"},
+  {id:2,name:"Classic Black Tee",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=80"},
+  {id:3,name:"Streetwear White Tee",image:"https://images.unsplash.com/photo-1527719327859-c6ce80353573?auto=format&fit=crop&w=700&q=80"},
+  {id:4,name:"Urban Style Tee",image:"https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=700&q=80"},
+  {id:5,name:"Everyday Essential Tee",image:"https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=700&q=80"},
+  {id:6,name:"Bold Graphic Tee",image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=700&q=80"}
+];
+
+let cart = [];
+
+function renderProducts(){
+  document.getElementById("products").innerHTML = products.map(p => `
+    <article class="card">
+      <img src="${p.image}" alt="${p.name}" loading="lazy">
+      <div class="card-content">
+        <h3>${p.name}</h3>
+        <div class="price">₹499</div>
+        <label for="size-${p.id}">Select size</label>
+        <select id="size-${p.id}">
+          <option value="S">Small (S)</option>
+          <option value="M" selected>Medium (M)</option>
+          <option value="L">Large (L)</option>
+          <option value="XL">Extra Large (XL)</option>
+        </select>
+        <button class="add" onclick="addToCart(${p.id})">ADD TO CART</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(id){
+  const p = products.find(x => x.id === id);
+  const size = document.getElementById("size-" + id).value;
+  const existing = cart.find(x => x.id === id && x.size === size);
+  if(existing) existing.qty++;
+  else cart.push({...p,size,qty:1});
+  renderCart();
+}
+
+function changeQty(index,amount){
+  cart[index].qty += amount;
+  if(cart[index].qty <= 0) cart.splice(index,1);
+  renderCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  renderCart();
+}
+
+function renderCart(){
+  const area = document.getElementById("cart-items");
+  const count = cart.reduce((sum,x) => sum + x.qty,0);
+  const total = cart.reduce((sum,x) => sum + x.qty * 499,0);
+  document.getElementById("count").textContent = count;
+  document.getElementById("total").textContent = total;
+
+  if(!cart.length){
+    area.textContent = "Your cart is empty.";
+    return;
+  }
+
+  area.innerHTML = cart.map((x,i) => `
+    <div class="cart-row">
+      <div><b>${x.name}</b><br>Size: ${x.size} · ₹499 each</div>
+      <div>
+        <button type="button" onclick="changeQty(${i},-1)">−</button>
+        ${x.qty}
+        <button type="button" onclick="changeQty(${i},1)">+</button>
+        <button type="button" onclick="removeItem(${i})">✕</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("checkout").addEventListener("submit",function(e){
+  e.preventDefault();
+  if(!cart.length){
+    alert("Please add a product to your cart first.");
+    return;
+  }
+
+  const name = document.getElementById("customer").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const total = cart.reduce((sum,x) => sum + x.qty * 499,0);
+
+  const lines = cart.map(x =>
+    `${x.name} | Size ${x.size} | Qty ${x.qty} | ₹${x.qty * 499}`
+  ).join("\n");
+
+  const message = `Hello Wolf Wears! I want to place an order:\n\n${lines}\n\nTotal: ₹${total}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+
+  // Replace with your official business WhatsApp number,
+  // including country code, digits only (India: 91xxxxxxxxxx).
+  const whatsappNumber = "91XXXXXXXXXX";
+
+  if(whatsappNumber.includes(6396013338)){
+    alert("Store owner: add your WhatsApp business number in the code before accepting orders.");
+    return;
+  }
+
+  window.open(
+    "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
